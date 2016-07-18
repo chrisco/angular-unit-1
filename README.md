@@ -43,7 +43,7 @@ The "Angular way":
 https://github.com/chrisco/angular-unit-1/commit/f8cae8c58a469b9aa53c2bfda0be13cd87f77a16
 
 The raw JavaScript way:    
-URL
+https://github.com/chrisco/angular-unit-1/commit/6433f31bf20e9ec989e4f41bdafff2f6859a1f57
 
 __Q&A__
 
@@ -70,3 +70,89 @@ A5) This is how Angular keeps the view in sync with the model. When Angular dete
 BONUS Q: Research the $digest loop.    
 
 BONUS A: The best explanation I found [here on SitePoint](https://www.sitepoint.com/understanding-angulars-apply-digest/): "The $digest cycle is where the watchers are fired. When a watcher is fired, AngularJS evaluates the scope model, and if it has changed then the corresponding listener function is called. So, our next question is when and how this $digest cycle starts."
+
+### 1.3
+
+__Instructions__    
+https://github.com/gSchool/angular-curriculum/blob/master/Unit-1/03-angular-mvc.md
+
+__Slides__
+https://slides.com/tylerbettilyon/angularmvc
+
+__My Commit__    
+URL
+
+__Notes__
+
+The MODEL is where an Angular application's data lives. It holds and represents the current state.    
+
+ The VIEW displays an Angular application's data (from the model) and handles user interaction. How defined? Via HTML, CSS, some JavaScript, Angular directives ('ng-'attributes) and two-way data bindings. Within the HTML document. Declarative.   
+
+The CONTROLLER, also sometimes called the "View Model", controls the relationship between the MODELA and VIEWS by exposing parts of the model and managing state. How defined? Via JavaScript, within Angular Controllers. Imperative.
+
+__Example__
+
+```html
+<!DOCTYPE html>
+<html ng-app="myapp">
+  <head>
+    <meta charset="utf-8">
+    <title>Hello, World!</title>
+  </head>
+  <body>
+    <div ng-controller="HelloController">
+      <h2>Hello, {{hello.title}}!</h2>
+    </div>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+    <script>
+    angular.module("myapp", [])
+      .controller("HelloController", function($scope) {
+        $scope.hello = {};
+        $scope.hello.title = "World";
+      });
+    </script>
+  </body>
+</html>
+```
+
+**Model**
+
+```javascript
+$scope.hello
+```
+
+**View**
+
+```html
+<div ng-controller="HelloController">
+  <h2>Hello, {{hello.title}}!</h2>
+</div>
+```
+
+**Controller**
+
+```javascript
+<script>
+angular.module("myapp", [])
+  .controller("HelloController", function($scope) {
+    $scope.hello = {};
+    $scope.hello.title = "World";
+  });
+</script>
+```
+
+__Resources__
+
+- [MVC and MVVM with AngularJS](https://web.archive.org/web/20160229124959/http://codechutney.in/blog/javascript/mvc-and-mvvm-with-angularjs/)
+
+### 1.4
+
+__Instructions__    
+https://github.com/gSchool/angular-curriculum/blob/master/Unit-1/04-expressions-and-filters.md
+
+__My Commit__    
+URL
+
+__Q&A__
+
+Q1)
