@@ -6,6 +6,8 @@
 
 ## My Answers to Curriculum Questions
 
+### 1.1
+
 Q1) Why learn Angular JS over other frameworks like Ember, Backbone, Knockout, etc?    
 
 A1) Because they are useful, interesting, and fun.
@@ -21,3 +23,5 @@ A3) No, it's more of a M V VM.
 Q4) Turn to the Angular docs. Find ng-app. What is it and what does it do? What does ng stand for?    
 
 A4) Here are the [ng-app docs](https://docs.angularjs.org/api/ng/directive/ngApp). "The ngApp directive designates the root element of the application and is typically placed near the root element of the page - e.g. on the <body> or <html> tags." The "ng" stands for "Angular."
+
+### 1.2
