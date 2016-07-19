@@ -1,18 +1,118 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="MyApp">
 
 <head>
 	<meta charset="utf-8">
 	<title>
-		<title>{{ greeting }} World</title>
+		<title></title>
 	</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js" charset="utf-8"></script>
 	<script src="app.js" charset="utf-8"></script>
 </head>
 
 <body>
-	<input type="text" name="auto" value="">
-	<h1></h1>
+	<div class="">
+		<h1>Unit 1.4</h1>
+		<section>
+			<h3>Text Filters</h3>
+			<label for="something">Please say something:</label>
+			<input ng-model="something" type="text" name="something" value="">
+			<p>
+				Yelling: {{ something | uppercase}}
+			</p>
+			<p>
+				Whispering: {{ something | lowercase}}
+			</p>
+		</section>
+		<section>
+			<h3>Text Filters</h3>
+			<p>
+				{{3.14159265359 | number:3}}
+			</p>
+			<p>
+				{{3.14159265359 | number:6}}
+			</p>
+			<p>
+				{{3.14159265359 | number:1}}
+			</p>
+		</section>
+		<section>
+			<h3>Rounding</h3>
+			<ng-pluralize count="digits" when="{0: 'digit',0: 'digits'}">
+			</ng-pluralize>
+			<label for="rounding">How many digits of Pi do you want to see?</label>
+			<select ng-model="rounding">
+				<option value="1" selected>1</option>
+				<option value="2">3</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="20">10</option>
+			</select>
+			<p>
+				Here you go! Pi rounded to {{rounding}} digits is {{ 3.14159265359 | number:rounding }}
+			</p>
+		</section>
+		<section ng-controller="Rounding">
+			<h3>Pluralize Demo</h3>
+			<select ng-model="selectedRange">
+				<option ng-repeat="range in ranges" ng-pluralize count="range" when="{1: '{{range}} digit', other: '{{range}} digits'}">{{range}}</option>
+			</select>
+		</section>
+		<section ng-controller="Total">
+			<h3>Tip Calculator</h3>
+			<label for="cost">How much did your meal cost?</label>
+			<input ng-model="cost" type="text" name="cost" value="">
+			<br>
+			<label for="tip">How much do you want to tip?</label>
+			<select ng-model="percentage" name="">
+				<option value=0.1>10%</option>
+				<option value=0.15>15%</option>
+				<option value=0.2>20%</option>
+			</select>
+			<h5>Subtotal: {{cost}}</h5>
+			<h5>Tip: {{cost * percentage}}</h5>
+			<h5>Tip (calculated in Controller): {{tip}}</h5>
+			<h5>Total (calculated in Controller): {{total}}</h5>
+		</section>
+		<section>
+			<h3>"this"</h3>
+			<div>{{this}}</div>
+		</section>
+		<section>
+			<h3>Mad Libs</h3>
+			<form ngModel="madLib1" class="" action="#" method="">
+				<label for="boyName">Boy's Name:</label>
+				<input ng-model="boyName" type="text" name="boyName" placeholder="Enter a boy's name">
+				<br>
+				<label for="Adj">Adjective:</label>
+				<input ng-model="adj" type="text" name="adj" placeholder="Enter an adjective">
+				<br>
+				<label for="pluralNoun1">Plural Noun:</label>
+				<input ng-model="pluralNoun1" type="text" name="pluralNoun1" placeholder="Enter a plural noun">
+				<br>
+				<label for="pluralNoun2">Plural Noun:</label>
+				<input ng-model="pluralNoun2" type="text" name="pluralNoun2" placeholder="Enter a plural noun">
+				<br>
+				<label for="insect">Insect (plural):</label>
+				<input ng-model="insect" type="text" name="insect" placeholder="Enter an insect (plural)">
+				<br>
+				<label for="pluralNoun3">Plural Noun:</label>
+				<input ng-model="pluralNoun3" type="text" name="pluralNoun3" placeholder="Enter a plural noun">
+				<br>
+				<label for="Verb">Verb ending in "s":</label>
+				<input ng-model="verb" type="text" name="adj" placeholder="Enter verb ending in 's'">
+			</form>
+
+			<p>I'm in love with <span>{{boyName}}</span>. He's so <span>{{adj}}</span>! He has big flat <span>{{pluralNoun1}}</span>, and when our <span>{{pluralNoun2}}</span> meet, I get <span>{{insect}}</span> in my stomach. I've fallen for him like a ton of <span>{{pluralNoun1}}</span>,
+				and he <span>{{verb}}</span> for me, too. But I think he's got another girlfriend. What should I do?</p>
+
+		</section>
+	</div>
 </body>
 
 </html>

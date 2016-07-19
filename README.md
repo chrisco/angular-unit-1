@@ -80,7 +80,7 @@ __Slides__
 https://slides.com/tylerbettilyon/angularmvc
 
 __My Commit__    
-URL
+https://github.com/chrisco/angular-unit-1/commit/e696039ff474e91c652403449991a3fc2e37f35a
 
 __Notes__
 
@@ -155,4 +155,31 @@ URL
 
 __Q&A__
 
-Q1)
+Q1) What are Angular expressions? How do they compare to tags from templating engines you've used before?    
+
+A1) According to the [Angular docs](https://docs.angularjs.org/guide/expression), Angular expressions are "JavaScript-like code snippets that are mainly placed in interpolation bindings such as <span title="{{ attrBinding }}">{{ textBinding }}</span> , but also used directly in directive attributes such as ng-click="functionExpression()"."
+
+Q2) What happens when you write invalid code in an expression? What type of error do you get?
+
+A2) I think the answer depends on what kind of invalid code you write. If you try to reference a model that doesn't exist, nothing happens. I've also had "{{ whatever }}" get printed into the index.html page. And I've seen "undefined" when trying to console.log things. I've also gotten NaN when trying to perform calculations. And I've seen error message printed in the Chrome console.
+
+Q3) What are Angular filters? Describe what a filter does and then name four built-in filters, including one that we haven't used yet.    
+
+A3) You can use filters within expressions to format data before displaying it. Some examples of built-in filters we used and didn't use yet are: currency, number, date, json, lowercase, uppercase, limitTo, and orderBy. See the [filter docs](https://docs.angularjs.org/guide/filter) for more information, including "Angular Expressions vs. JavaScript Expressions".
+
+Q4) What's the syntax for filters?    
+
+A4) hTe syntax is "{{ expression | filter1 | filter2 | ... }}". With arguments, the syntax is "{{ expression | filter:argument1:argument2:... }}".
+
+Q5) Can you use more than one filter?    
+
+A5) Yes, see examples above.
+
+Q6) We'll soon see how to create custom filters. What's a use case for a custom filter?    
+
+A6) To filter an object.
+
+__Resources__
+
+https://docs.angularjs.org/guide/expression
+https://docs.angularjs.org/guide/filter
