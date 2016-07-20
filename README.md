@@ -6,7 +6,7 @@
 
 ## My Answers to Curriculum Questions
 
-### 1.1
+### 1.1 - Introduction and Setup
 
 __Instructions__    
 https://github.com/gSchool/angular-curriculum/blob/master/Unit-1/01-intro-and-setup.md
@@ -32,7 +32,7 @@ Q4) Turn to the Angular docs. Find ng-app. What is it and what does it do? What 
 
 A4) Here are the [ng-app docs](https://docs.angularjs.org/api/ng/directive/ngApp). "The ngApp directive designates the root element of the application and is typically placed near the root element of the page - e.g. on the <body> or <html> tags." The "ng" stands for "Angular."
 
-### 1.2
+### 1.2 - Data Binding
 
 __Instructions__    
 https://github.com/gSchool/angular-curriculum/blob/master/Unit-1/02-data-binding.md
@@ -71,7 +71,7 @@ BONUS Q: Research the $digest loop.
 
 BONUS A: The best explanation I found [here on SitePoint](https://www.sitepoint.com/understanding-angulars-apply-digest/): "The $digest cycle is where the watchers are fired. When a watcher is fired, AngularJS evaluates the scope model, and if it has changed then the corresponding listener function is called. So, our next question is when and how this $digest cycle starts."
 
-### 1.3
+### 1.3 - Angular MVC
 
 __Instructions__    
 https://github.com/gSchool/angular-curriculum/blob/master/Unit-1/03-angular-mvc.md
@@ -145,13 +145,13 @@ __Resources__
 
 - [MVC and MVVM with AngularJS](https://web.archive.org/web/20160229124959/http://codechutney.in/blog/javascript/mvc-and-mvvm-with-angularjs/)
 
-### 1.4
+### 1.4 - Expressions and Filters
 
 __Instructions__    
 https://github.com/gSchool/angular-curriculum/blob/master/Unit-1/04-expressions-and-filters.md
 
 __My Commit__    
-URL
+https://github.com/chrisco/angular-unit-1/commit/79644ee60400f91aef8dd288b2fe0fad5683e934
 
 __Q&A__
 
@@ -183,3 +183,150 @@ __Resources__
 
 https://docs.angularjs.org/guide/expression
 https://docs.angularjs.org/guide/filter
+
+### 1.5 - Built In Directives
+
+__Instructions__    
+https://github.com/gSchool/angular-curriculum/blob/master/Unit-1/05-built-in-directives.md
+
+__My Commit__    
+[INSERT URL HERE]
+
+__List of Angular Directives__
+https://docs.angularjs.org/api/ng/directive
+
+__Q&A__
+
+Q1) What is the purpose of ng-init?
+
+A1) From the [ng-init docs](https://docs.angularjs.org/api/ng/directive/ngInit): "The ngInit directive __allows you to evaluate an expression in the current scope__. There are only a few appropriate uses of ngInit, such as: (1) for aliasing special properties of ngRepeat, as seen in the demo in [the docs](https://docs.angularjs.org/api/ng/directive/ngInit); and, (2) for injecting data via server side scripting. Besides these few cases, use controllers rather than ngInit to initialize values on a scope."
+"
+
+Q2) Why use ng-src and ng-href?
+
+A2) "Only use ng-src and ng-href if you have dynamic links or have to load images dynamically. Use the href and src otherwise." SOURCE: [Using ng-src and ng-href](http://www.befundoo.com/blog/using-ng-src-and-ng-href/).
+
+Q3) What are directives?
+
+A3) "At a high level, directives are markers on a DOM element (such as an attribute, element name, comment or CSS class) that tell AngularJS's HTML compiler ($compile) to attach a specified behavior to that DOM element (e.g. via event listeners), or even to transform the DOM element and its children. Angular comes with a set of these directives built-in, like ngBind, ngModel, and ngClass. Much like you create controllers and services, you can create your own directives for Angular to use." SOURCE: [Angular Docs for Directives](https://docs.angularjs.org/guide/directive).
+
+Q4) Does ng-class require an object to be passed in?
+
+A4) I think so. One thing that did come up for me was classes with hyphens causing problems. I solved it by changing them to camelcase, as in this example from my code:
+```html
+<span ng-show="{{camera.onSale}}" ng-class="{onSale: {{camera.onSale}}}">{{camera.price | currency}} ON SALE!</span>
+```
+Now I know that: When using classes with hyphens I must put single quotes around the class. I also learned that the ternary operator is good for toggling classes, such as shown here:
+
+HTML:
+```html
+<form class="" action="" method="">
+  <label for="password">Password:</label>
+  <input ng-model="password" type="password" name="password" value="">
+  <p ng-class="password.length > 5 ? 'valid-pw' : 'invalid-pw'">
+    Your password is {{password.length}} characters long.
+  </p>
+  <p ng-show="password.length > 5">
+    Password is valid!
+  </p>
+  <button ng-disabled="password.length < 6" type="button" name="button">Sign Up!</button>
+</form>
+```
+CSS:
+```css
+.valid-pw {
+  color: green;
+}
+
+.invalid-pw {
+  color: red;
+}
+```
+
+Q5) In what order does an ng-repeat display items?
+
+A5) I think it depends. If iterating over an array, I think the iteration order will match the array order. But, if iterating over an object, the order can vary, as JavaScript does not define the order in which keys are returned for an object. If you want to sort the results, you can use Angular's [orderBy filter](https://docs.angularjs.org/api/ng/filter/orderBy).
+
+Q6) How does ng-repeat handle duplicate data?
+
+A6) The ng-repeat directive does not take duplicate data well. When I tried it, errors were thrown.
+
+__Bonus__
+
+Question:
+
+What's happening in each of these examples? What's the purpose of the directive?
+
+* [ng-cloak](https://github.com/gSchool/angular-curriculum/blob/master/Unit-1/examples/ng-cloak)
+* [ng-include](https://github.com/gSchool/angular-curriculum/blob/master/Unit-1/examples/ng-include)
+* [ng-pluralize](https://github.com/gSchool/angular-curriculum/blob/master/Unit-1/examples/ng-pluralize)
+
+Answer (v1):
+
+* [ng-cloak](https://docs.angularjs.org/api/ng/directive/ngCloak): "The ngCloak directive is used to prevent the Angular html template from being briefly displayed by the browser in its raw (uncompiled) form while your application is loading. Use this directive to avoid the undesirable flicker effect caused by the html template display."
+* [ng-include](https://docs.angularjs.org/api/ng/directive/ngInclude): "Fetches, compiles and includes an external HTML fragment. By default, the template URL is restricted to the same domain and protocol as the application document. This is done by calling $sce.getTrustedResourceUrl on it. To load templates from other domains or protocols you may either whitelist them or wrap them as trusted values. Refer to Angular's Strict Contextual Escaping. In addition, the browser's Same Origin Policy and Cross-Origin Resource Sharing (CORS) policy may further restrict whether the template is successfully loaded. For example, ngInclude won't work for cross-domain requests on all browsers and for file:// access on some browsers."
+* [ng-pluralize](https://docs.angularjs.org/api/ng/directive/ngPluralize): "ngPluralize is a directive that displays messages according to en-US localization rules. These rules are bundled with angular.js, but can be overridden (see Angular i18n dev guide). You configure ngPluralize directive by specifying the mappings between plural categories and the strings to be displayed."
+
+### 1.6 Intro to Controllers
+
+__Instructions__    
+https://github.com/gSchool/angular-curriculum/blob/master/Unit-1/06-intro-to-controllers.md
+
+__My Commit__    
+[INSERT URL HERE]
+
+
+
+### 1.7 Scope
+
+__Instructions__    
+https://github.com/gSchool/angular-curriculum/blob/master/Unit-1/07-intro-to-scope.md
+
+__My Commit__    
+[INSERT URL HERE]
+
+__Q&A__
+
+
+### 1.8 Angular Events
+
+__Instructions__    
+https://github.com/gSchool/angular-curriculum/blob/master/Unit-1/08-intro-to-events.md
+
+__My Commit__    
+[INSERT URL HERE]
+
+__Q&A__
+
+
+### 1.9 Form Validation
+
+__Instructions__    
+https://github.com/gSchool/angular-curriculum/blob/master/Unit-1/09-form-validation.md
+
+__My Commit__    
+[INSERT URL HERE]
+
+__Q&A__
+
+
+### 1.10 Animations
+
+__Instructions__    
+https://github.com/gSchool/angular-curriculum/blob/master/Unit-1/10-animation.md
+
+__My Commit__    
+[INSERT URL HERE]
+
+__Q&A__
+
+
+### 1.11 Unit 1 Assessment Reddit Clone
+
+__Instructions__    
+https://github.com/gSchool/angular-curriculum/blob/master/Unit-1/11-reddit-clone.md
+
+__My Commit__    
+[INSERT URL HERE]
+
+__Q&A__

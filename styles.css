@@ -1,0 +1,24 @@
+section h3 {
+  background-color: WhiteSmoke;
+}
+
+input, label, input, span {
+  display: block;
+}
+
+.highlight {
+  background-color: yellow;
+}
+
+.valid-pw {
+  color: green;
+}
+
+.invalid-pw {
+  color: red;
+}
+
+.onSale {
+  display: block;
+  color: DarkOrange;
+}

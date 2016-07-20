@@ -6,6 +6,7 @@
 	<title>
 		<title></title>
 	</title>
+	<link rel="stylesheet" href="styles.css" media="screen" title="no title" charset="utf-8">
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js" charset="utf-8"></script>
 	<script src="app.js" charset="utf-8"></script>
 </head>
@@ -67,7 +68,6 @@
 			<h3>Tip Calculator</h3>
 			<label for="cost">How much did your meal cost?</label>
 			<input ng-model="cost" type="text" name="cost" value="">
-			<br>
 			<label for="tip">How much do you want to tip?</label>
 			<select ng-model="percentage" name="">
 				<option value=0.1>10%</option>
@@ -88,29 +88,115 @@
 			<form ngModel="madLib1" class="" action="#" method="">
 				<label for="boyName">Boy's Name:</label>
 				<input ng-model="boyName" type="text" name="boyName" placeholder="Enter a boy's name">
-				<br>
+
 				<label for="Adj">Adjective:</label>
 				<input ng-model="adj" type="text" name="adj" placeholder="Enter an adjective">
-				<br>
+
 				<label for="pluralNoun1">Plural Noun:</label>
 				<input ng-model="pluralNoun1" type="text" name="pluralNoun1" placeholder="Enter a plural noun">
-				<br>
+
 				<label for="pluralNoun2">Plural Noun:</label>
 				<input ng-model="pluralNoun2" type="text" name="pluralNoun2" placeholder="Enter a plural noun">
-				<br>
+
 				<label for="insect">Insect (plural):</label>
 				<input ng-model="insect" type="text" name="insect" placeholder="Enter an insect (plural)">
-				<br>
+
 				<label for="pluralNoun3">Plural Noun:</label>
 				<input ng-model="pluralNoun3" type="text" name="pluralNoun3" placeholder="Enter a plural noun">
-				<br>
+
 				<label for="Verb">Verb ending in "s":</label>
 				<input ng-model="verb" type="text" name="adj" placeholder="Enter verb ending in 's'">
 			</form>
-
 			<p>I'm in love with <span>{{boyName}}</span>. He's so <span>{{adj}}</span>! He has big flat <span>{{pluralNoun1}}</span>, and when our <span>{{pluralNoun2}}</span> meet, I get <span>{{insect}}</span> in my stomach. I've fallen for him like a ton of <span>{{pluralNoun1}}</span>,
 				and he <span>{{verb}}</span> for me, too. But I think he's got another girlfriend. What should I do?</p>
-
+		</section>
+		<section ng-init="names=['Harry', 'Ron', 'Hermione', 'Sirius', 'Hedwig', 'Tonks']">
+			<h3>ng-repeat in li tag</h3>
+			<ul>
+				<li ng-repeat='name in names'>
+					{{name}}
+				</li>
+			</ul>
+			<h3>ng-repeat in ul tag</h3>
+			<ul ng-repeat='name in names'>
+				<li>{{name}}</li>
+			</ul>
+		</section>
+		<section ng-controller="Cards">
+			<h3>ng-repeat key value pairs (FIXME)</h3>
+			<ul ng-model="cards">
+				<li ng-repeat="(key, value) in cards">
+					{{value}}
+				</li>
+			</ul>
+		</section>
+		<section ng-init="dupes=[1, 2, 5, 6, 9]">
+			<h3>Use ng-repeat to iterate through array with duplicates</h3>
+			<p>
+				Throws this error in Chrome Dev Tools console if there are duplicates in the array (such as this one: ng-init="dupes=[1, 1, 2, 5, 6, 9, 9, 9]): "Error: [ngRepeat:dupes] Duplicates in a repeater are not allowed. Use 'track by' expression to specify unique
+				keys. Repeater: number in dupes, Duplicate key: number:1, Duplicate value: 1"
+			</p>
+			<!-- <ul>
+				<li ng-repeat="number in dupes">
+					{{number}}
+				</li>
+			</ul> -->
+		</section>
+		<section>
+			<h3>ng-show/hide</h3>
+			<p>
+				Angular uses CSS "display: none !important;" to hide things.
+			</p>
+			<div ng-show='3 + 4 == 5'>
+				3 + 4 isn't 5, don't show
+			</div>
+			<div ng-show='3 + 4 == 7'>
+				3 + 4 is 7, do show
+			</div>
+			<div ng-hide='3 + 4 == 5'>
+				3 + 4 isn't 5, don't hide
+			</div>
+			<div ng-hide='3 + 4 == 7'>
+				3 + 4 is 7, do hide
+			</div>
+		</section>
+		<section>
+			<h3>password validator (FIXME: Pluralize)</h3>
+			<form class="" action="" method="">
+				<label for="password">Password:</label>
+				<input ng-model="password" type="password" name="password" value="">
+				<p ng-class="password.length > 5 ? 'valid-pw' : 'invalid-pw'">
+					Your password is {{password.length}} characters long.
+				</p>
+				<p ng-show="password.length > 5">
+					Password is valid!
+				</p>
+				<button ng-disabled="password.length < 6" type="button" name="button">Sign Up!</button>
+			</form>
+		</section>
+		<section>
+			<h3>ng-class</h3>
+			<div ng-class='{highlight: 4 + 4 == 8}'> 4 + 4 = 8</div>
+			<div ng-class='{highlight: 4 + 4 == 10}'>4 + 4 = 10</div>
+		</section>
+		<section ng-controller="Cameras">
+			<h3>camera shop interface</h3>
+			<div ng-model="cameras" class="">
+				<select ng-model="filterCameras">
+					<option value="rating">Rating</option>
+					<option value="price">Price</option>
+				</select>
+        <p>
+          Filter by: {{filterCameras}}
+        </p>
+				<div ng-repeat="camera in cameras | orderBy: filterCameras" class="">
+					<h4>{{camera.title}}</h4>
+					<span ng-hide="{{camera.onSale}}" >{{camera.price | currency}}</span>
+          <span ng-show="{{camera.onSale}}" ng-class="{onSale: {{camera.onSale}}}">{{camera.price | currency}} ON SALE!!!</span>
+					<span>Rating: {{camera.rating}}</span>
+					<img ng-src="{{camera.image}}" width="200px" />
+				</div>
+			</div>
 		</section>
 	</div>
 </body>
